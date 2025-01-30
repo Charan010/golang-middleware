@@ -8,7 +8,7 @@ This project implements a rate limiter using the **Token Bucket algorithm** in G
 - **Simple Integration**: Easily integrates into existing Go applications.
 - **Client-based Rate Limiting**: Rate limits API calls based on client IP address.
 
-# Installion
+# Installation
 
 You can integrate this middleware into your Go project by following these steps:
 
@@ -45,16 +45,11 @@ func HomePage(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-    // Create a new HTTP ServeMux (router)
-    mux := http.NewServeMux()
 
-    // Register your routes
     mux.HandleFunc("/", HomePage)
 
-    // Apply the rate-limiting middleware to the mux
     rateLimitedHandler := ratelimiter.RateLimitMiddleware(10, 1, mux)
 
-    // Start the server with rate-limiting enabled
     log.Fatal(http.ListenAndServe(":8080", rateLimitedHandler))
 }
 
